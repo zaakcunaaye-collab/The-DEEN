@@ -1,1 +1,3278 @@
+<!DOCTYPE html>
+<html lang="so">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101817">
+<title>Deen of Islam</title>
 
+<style>
+*{
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+}
+
+:root{
+  --bg:#101817;
+  --card:#18221f;
+  --card2:#1d2925;
+  --text:#fff;
+  --muted:#aeb9b4;
+  --primary:#35c98a;
+  --primary2:#23835d;
+  --border:#304039;
+  --danger:#e57373;
+}
+
+body.light{
+  --bg:#f4f6f8;
+  --card:#fff;
+  --card2:#eef2f0;
+  --text:#18202a;
+  --muted:#687380;
+  --primary:#16845b;
+  --primary2:#106b48;
+  --border:#dfe5e2;
+}
+
+html,body{
+  margin:0;
+  min-height:100%;
+}
+
+body{
+  font-family:Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  transition:.2s;
+}
+
+button,
+select,
+input,
+textarea{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+.app{
+  width:100%;
+  max-width:700px;
+  margin:auto;
+  min-height:100vh;
+  padding-bottom:82px;
+}
+
+.page{
+  display:none;
+  padding:16px;
+}
+
+.page.active{
+  display:block;
+}
+
+/* HEADER */
+
+.top-header{
+  padding:22px 16px;
+  text-align:center;
+  border-bottom:1px solid var(--border);
+  background:var(--card);
+}
+
+.top-header h1{
+  margin:0;
+  font-size:25px;
+}
+
+.top-header p{
+  margin:7px 0 0;
+  color:var(--muted);
+  font-size:13px;
+}
+
+/* HOME */
+
+.hero{
+  background:linear-gradient(145deg,var(--card),var(--card2));
+  border:1px solid var(--border);
+  border-radius:22px;
+  padding:22px;
+  margin-bottom:15px;
+}
+
+.hero h2{
+  margin:0 0 10px;
+}
+
+.hero p{
+  color:var(--muted);
+  line-height:1.7;
+}
+
+.ayah{
+  direction:rtl;
+  text-align:center;
+  font-family:"Amiri","Traditional Arabic",serif;
+  font-size:24px;
+  line-height:1.9;
+  margin:18px 0;
+}
+
+.primary-btn{
+  width:100%;
+  border:0;
+  border-radius:15px;
+  background:var(--primary);
+  color:#fff;
+  padding:14px;
+  font-weight:bold;
+}
+
+.cards{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.home-card{
+  border:1px solid var(--border);
+  background:var(--card);
+  border-radius:18px;
+  padding:18px 14px;
+  color:var(--text);
+  text-align:left;
+}
+
+.home-card .icon{
+  font-size:30px;
+  margin-bottom:9px;
+}
+
+.home-card strong{
+  display:block;
+}
+
+.home-card span{
+  color:var(--muted);
+  font-size:12px;
+  display:block;
+  margin-top:5px;
+}
+
+/* GENERAL */
+
+.section{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:16px;
+  margin-bottom:14px;
+}
+
+.section-title{
+  color:var(--muted);
+  font-size:13px;
+  font-weight:bold;
+  margin:18px 4px 9px;
+}
+
+.input{
+  width:100%;
+  border:1px solid var(--border);
+  background:var(--card2);
+  color:var(--text);
+  border-radius:14px;
+  padding:13px;
+  outline:none;
+}
+
+.small-btn{
+  border:1px solid var(--border);
+  background:var(--card2);
+  color:var(--text);
+  border-radius:12px;
+  padding:10px 14px;
+}
+
+/* BOTTOM NAV */
+
+.bottom-nav{
+  position:fixed;
+  left:0;
+  right:0;
+  bottom:0;
+  height:70px;
+  background:var(--card);
+  border-top:1px solid var(--border);
+  display:flex;
+  justify-content:center;
+  z-index:100;
+}
+
+.nav-inner{
+  width:100%;
+  max-width:700px;
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+}
+
+.nav-btn{
+  border:0;
+  background:transparent;
+  color:var(--muted);
+  font-size:11px;
+}
+
+.nav-btn span{
+  display:block;
+  font-size:22px;
+  margin-bottom:3px;
+}
+
+.nav-btn.active{
+  color:var(--primary);
+}
+
+/* QURAN */
+
+.quran-actions{
+  display:flex;
+  gap:8px;
+  margin-bottom:12px;
+}
+
+.quran-actions button{
+  flex:1;
+}
+
+.surah-list{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.surah-item{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:14px;
+  border:1px solid var(--border);
+  border-radius:15px;
+  background:var(--card);
+}
+
+.surah-number{
+  min-width:38px;
+  height:38px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:var(--card2);
+  color:var(--primary);
+  font-weight:bold;
+}
+
+.surah-info{
+  flex:1;
+}
+
+.surah-info strong{
+  display:block;
+}
+
+.surah-info small{
+  color:var(--muted);
+}
+
+.surah-arabic{
+  direction:rtl;
+  font-family:"Amiri","Traditional Arabic",serif;
+  font-size:21px;
+}
+
+.reader{
+  display:none;
+}
+
+.reader.active{
+  display:block;
+}
+
+.reader-header{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:12px;
+}
+
+.reader-header h2{
+  flex:1;
+  margin:0;
+}
+
+.reader-page{
+  min-height:65vh;
+  background:#f7f0dc;
+  color:#17120c;
+  border-radius:4px;
+  padding:24px 18px;
+  box-shadow:0 5px 25px rgba(0,0,0,.2);
+}
+
+body.light .reader-page{
+  background:#f7f0dc;
+  color:#17120c;
+}
+
+.page-title{
+  text-align:center;
+  direction:rtl;
+  font-family:"Amiri","Traditional Arabic",serif;
+  font-size:28px;
+  margin-bottom:20px;
+}
+
+.bismillah{
+  direction:rtl;
+  text-align:center;
+  font-family:"Amiri","Traditional Arabic",serif;
+  font-size:25px;
+  margin-bottom:20px;
+}
+
+.ayah-line{
+  direction:rtl;
+  text-align:right;
+  font-family:"Amiri","Traditional Arabic",serif;
+  font-size:24px;
+  line-height:2.25;
+  margin-bottom:8px;
+}
+
+.ayah-num{
+  font-family:Arial,sans-serif;
+  font-size:13px;
+  border:1px solid #9d9278;
+  border-radius:50%;
+  padding:3px 6px;
+  margin:0 4px;
+}
+
+.reader-controls{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-top:14px;
+}
+
+.reader-controls button{
+  flex:1;
+  border:1px solid var(--border);
+  background:var(--card);
+  color:var(--text);
+  border-radius:13px;
+  padding:13px;
+}
+
+.reader-page-number{
+  text-align:center;
+  color:var(--muted);
+  margin-top:9px;
+  font-size:13px;
+}
+
+.download-status{
+  color:var(--muted);
+  line-height:1.6;
+  font-size:13px;
+}
+
+/* AD AREA */
+
+.online-ad{
+  display:none;
+  background:var(--card2);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:9px;
+  margin:10px 0;
+  text-align:center;
+  color:var(--muted);
+  font-size:11px;
+}
+
+/* ADHKAR */
+
+.category-row{
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  padding-bottom:5px;
+}
+
+.category-btn{
+  white-space:nowrap;
+  border:1px solid var(--border);
+  background:var(--card);
+  color:var(--text);
+  border-radius:20px;
+  padding:10px 13px;
+}
+
+.category-btn.active{
+  background:var(--primary);
+  color:#fff;
+}
+
+.progress-text{
+  color:var(--muted);
+  font-size:13px;
+  margin-bottom:8px;
+}
+
+.progress{
+  height:8px;
+  background:var(--card2);
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.progress-fill{
+  height:100%;
+  width:0;
+  background:var(--primary);
+}
+
+.dhikr-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:18px;
+  margin-bottom:12px;
+}
+
+.dhikr-arabic{
+  direction:rtl;
+  text-align:center;
+  font-family:"Amiri","Traditional Arabic",serif;
+  font-size:25px;
+  line-height:2;
+}
+
+.dhikr-meaning{
+  color:var(--muted);
+  line-height:1.7;
+  margin:13px 0;
+  font-size:14px;
+}
+
+.count-btn{
+  width:100%;
+  border:0;
+  background:var(--primary2);
+  color:#fff;
+  padding:13px;
+  border-radius:13px;
+}
+
+.count-btn.done{
+  background:#34583f;
+}
+
+/* TASBIIX */
+
+.tasbih{
+  text-align:center;
+}
+
+.tasbih-select{
+  width:100%;
+  border:1px solid var(--border);
+  background:var(--card);
+  color:var(--text);
+  border-radius:15px;
+  padding:14px;
+  margin-bottom:15px;
+}
+
+.tasbih-arabic{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:20px 12px;
+  direction:rtl;
+  font-family:"Amiri","Traditional Arabic",serif;
+  font-size:28px;
+  line-height:1.8;
+}
+
+.counter{
+  width:220px;
+  height:220px;
+  border-radius:50%;
+  background:var(--card);
+  border:8px solid var(--primary2);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  margin:22px auto 15px;
+}
+
+.counter-number{
+  font-size:60px;
+  font-weight:bold;
+}
+
+.counter-label{
+  color:var(--muted);
+  font-size:13px;
+}
+
+.tasbih-main{
+  width:165px;
+  height:165px;
+  border-radius:50%;
+  border:0;
+  background:#3c914d;
+  color:#fff;
+  font-size:24px;
+  font-weight:bold;
+}
+
+.tasbih-main:active{
+  transform:scale(.94);
+}
+
+.controls{
+  display:flex;
+  justify-content:center;
+  gap:9px;
+  margin-top:18px;
+}
+
+.target-row{
+  display:flex;
+  gap:8px;
+  margin-top:18px;
+}
+
+/* HADITH */
+
+.search{
+  margin-bottom:12px;
+}
+
+.hadith-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:17px;
+  margin-bottom:11px;
+}
+
+.hadith-arabic{
+  direction:rtl;
+  font-family:"Amiri","Traditional Arabic",serif;
+  font-size:21px;
+  line-height:2;
+}
+
+.hadith-somali{
+  color:var(--muted);
+  line-height:1.7;
+  margin-top:12px;
+}
+
+.hadith-footer{
+  margin-top:12px;
+  padding-top:10px;
+  border-top:1px solid var(--border);
+  display:flex;
+  justify-content:space-between;
+  color:var(--muted);
+  font-size:12px;
+}
+
+.favorite{
+  border:0;
+  background:transparent;
+  color:#e8c76a;
+  font-size:20px;
+}
+
+/* AI */
+
+.ai-welcome{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:19px;
+}
+
+.ai-welcome p{
+  color:var(--muted);
+  line-height:1.7;
+  font-size:14px;
+}
+
+.warning{
+  margin-top:12px;
+  background:var(--card2);
+  border-radius:12px;
+  padding:12px;
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.6;
+}
+
+.quick{
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  margin:13px 0;
+}
+
+.quick button{
+  white-space:nowrap;
+  border:1px solid var(--border);
+  background:var(--card);
+  color:var(--text);
+  padding:10px 13px;
+  border-radius:20px;
+}
+
+.chat{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  padding-bottom:12px;
+}
+
+.message{
+  max-width:90%;
+  padding:14px;
+  border-radius:17px;
+  line-height:1.7;
+  font-size:14px;
+}
+
+.message.user{
+  align-self:flex-end;
+  background:#fff;
+  color:#111;
+  border-bottom-right-radius:5px;
+}
+
+.message.ai{
+  align-self:flex-start;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-bottom-left-radius:5px;
+}
+
+.reference{
+  margin-top:9px;
+  padding-top:8px;
+  border-top:1px solid var(--border);
+  color:var(--muted);
+  font-size:12px;
+}
+
+.typing{
+  display:none;
+  color:var(--muted);
+  padding:10px;
+}
+
+.ai-input{
+  display:flex;
+  gap:8px;
+  margin-top:8px;
+}
+
+.ai-input textarea{
+  flex:1;
+  resize:none;
+  height:50px;
+  border:1px solid var(--border);
+  outline:none;
+  border-radius:14px;
+  background:var(--card);
+  color:var(--text);
+  padding:13px;
+}
+
+.send{
+  width:52px;
+  border:0;
+  border-radius:14px;
+  background:var(--primary);
+  color:#fff;
+  font-size:20px;
+}
+
+/* SETTINGS */
+
+.setting{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:16px;
+  border-bottom:1px solid var(--border);
+  gap:12px;
+}
+
+.setting:last-child{
+  border-bottom:0;
+}
+
+.setting-info{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.setting-icon{
+  font-size:24px;
+  width:32px;
+  text-align:center;
+}
+
+.setting-title{
+  font-weight:bold;
+}
+
+.setting-subtitle{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:4px;
+}
+
+.switch{
+  position:relative;
+  width:48px;
+  height:26px;
+}
+
+.switch input{
+  opacity:0;
+  width:0;
+  height:0;
+}
+
+.slider{
+  position:absolute;
+  inset:0;
+  background:#89938f;
+  border-radius:30px;
+}
+
+.slider:before{
+  content:"";
+  position:absolute;
+  width:20px;
+  height:20px;
+  left:3px;
+  bottom:3px;
+  background:#fff;
+  border-radius:50%;
+  transition:.2s;
+}
+
+.switch input:checked + .slider{
+  background:var(--primary);
+}
+
+.switch input:checked + .slider:before{
+  transform:translateX(22px);
+}
+
+.about{
+  text-align:center;
+  padding:20px;
+}
+
+.about .logo{
+  font-size:52px;
+}
+
+.about h2{
+  color:var(--primary);
+}
+
+.about p{
+  color:var(--muted);
+  line-height:1.7;
+  font-size:14px;
+}
+
+/* MODAL */
+
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.72);
+  z-index:300;
+  padding:25px 15px;
+  overflow:auto;
+}
+
+.modal.show{
+  display:block;
+}
+
+.modal-box{
+  max-width:650px;
+  margin:40px auto;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:20px;
+}
+
+.modal-close{
+  width:100%;
+  margin-top:15px;
+  padding:12px;
+  border:0;
+  border-radius:12px;
+  background:var(--primary);
+  color:#fff;
+}
+
+@media(max-width:380px){
+  .cards{
+    grid-template-columns:1fr;
+  }
+
+  .counter{
+    width:195px;
+    height:195px;
+  }
+
+  .tasbih-main{
+    width:150px;
+    height:150px;
+  }
+
+  .ayah-line{
+    font-size:21px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- ================= HOME ================= -->
+
+<section id="homePage" class="page active">
+
+<div class="top-header">
+<h1>🕌 Deen of Islam</h1>
+<p>Ku soo dhawoow walaal 🤲🏽</p>
+</div>
+
+<div class="hero">
+<h2>Assalaamu Calaykum 🤲🏽</h2>
+
+<p>
+Ku soo dhawoow Deen of Islam.
+Baro Qur'aanka, Xadiiska, Adhkaarta iyo
+xuska Allaah meel keliya.
+</p>
+
+<div class="ayah">
+إِنَّ أَقْرَبَ مَا يَكُونُ الْعَبْدُ مِنْ رَبِّهِ وَهُوَ سَاجِدٌ
+</div>
+
+<button class="primary-btn" onclick="openPage('quran')">
+📖 Akhri Qur'aanka
+</button>
+</div>
+
+<div class="online-ad" id="homeAd">
+Xayeysiis — online
+</div>
+
+<div class="cards">
+
+<button class="home-card" onclick="openPage('quran')">
+<div class="icon">📖</div>
+<strong>Qur'aan</strong>
+<span>Akhris iyo dhageysi</span>
+</button>
+
+<button class="home-card" onclick="openPage('hadith')">
+<div class="icon">📚</div>
+<strong>Xadiis</strong>
+<span>Xadiisyo iyo macne Somali</span>
+</button>
+
+<button class="home-card" onclick="openPage('adhkar')">
+<div class="icon">🤲</div>
+<strong>Adhkar</strong>
+<span>Subax, galab iyo maalinle</span>
+</button>
+
+<button class="home-card" onclick="openPage('tasbih')">
+<div class="icon">📿</div>
+<strong>Tasbiix</strong>
+<span>Tirso xuska Allaah</span>
+</button>
+
+<button class="home-card" onclick="openPage('ai')">
+<div class="icon">🤖</div>
+<strong>Deen AI</strong>
+<span>Su'aalo ku saabsan diinta</span>
+</button>
+
+<button class="home-card" onclick="openPage('settings')">
+<div class="icon">⚙️</div>
+<strong>Settings</strong>
+<span>Dejinta app-ka</span>
+</button>
+
+</div>
+
+</section>
+
+
+<!-- ================= QURAN ================= -->
+
+<section id="quranPage" class="page">
+
+<div class="top-header">
+<h1>📖 Qur'aanka Kariimka</h1>
+<p>114 Suuradood</p>
+</div>
+
+<div id="quranOnlineAd" class="online-ad">
+Xayeysiis — online
+</div>
+
+<div id="quranMain">
+
+<div class="section">
+
+<div class="quran-actions">
+<button class="small-btn" onclick="showQuranList()">
+📖 Akhri
+</button>
+</div>
+
+<input
+id="surahSearch"
+class="input"
+placeholder="Raadi suurad..."
+oninput="filterSurahs()"
+>
+
+<div id="quranStatus" class="download-status" style="margin-top:10px"></div>
+
+<button
+class="primary-btn"
+style="margin-top:12px"
+onclick="downloadFullQuran()"
+>
+⬇️ Soo dejiso Qur'aanka offline
+</button>
+
+</div>
+
+<div id="surahList" class="surah-list"></div>
+
+</div>
+
+<div id="reader" class="reader">
+
+<div class="reader-header">
+<button class="small-btn" onclick="closeReader()">←</button>
+<h2 id="readerTitle">Qur'aan</h2>
+</div>
+
+<div id="readerPage" class="reader-page"></div>
+
+<div class="reader-controls">
+
+<button id="prevPageBtn" onclick="changeQuranPage(-1)">
+← Bogga hore
+</button>
+
+<button id="nextPageBtn" onclick="changeQuranPage(1)">
+Bogga xiga →
+</button>
+
+</div>
+
+<div id="readerPageNumber" class="reader-page-number"></div>
+
+</div>
+
+</section>
+
+
+<!-- ================= ADHKAR ================= -->
+
+<section id="adhkarPage" class="page">
+
+<div class="top-header">
+<h1>🤲 Adhkar</h1>
+<p>Xuska Allaah</p>
+</div>
+
+<div class="section-title">Qaybaha</div>
+
+<div class="category-row" id="adhkarCategories"></div>
+
+<div class="section">
+<div class="progress-text" id="adhkarProgressText">
+Horumarka: 0%
+</div>
+
+<div class="progress">
+<div id="adhkarProgressFill" class="progress-fill"></div>
+</div>
+</div>
+
+<div id="adhkarList"></div>
+
+<button
+class="small-btn"
+style="width:100%;margin-top:4px"
+onclick="resetAdhkar()"
+>
+↻ Dib u bilow qaybta
+</button>
+
+</section>
+
+
+<!-- ================= TASBIIX ================= -->
+
+<section id="tasbihPage" class="page">
+
+<div class="top-header">
+<h1>📿 Tasbiix</h1>
+<p>Xuska Allaah</p>
+</div>
+
+<div class="tasbih">
+
+<select id="tasbihSelect" class="tasbih-select">
+<option value="subhanallah">سُبْحَانَ اللَّهِ</option>
+<option value="alhamdulillah">الْحَمْدُ لِلَّهِ</option>
+<option value="allahuakbar">اللَّهُ أَكْبَرُ</option>
+<option value="istighfar">أَسْتَغْفِرُ اللَّهَ</option>
+<option value="hawqala">لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ</option>
+<option value="salawat">اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ</option>
+<option value="la ilaha">لَا إِلَٰهَ إِلَّا اللَّهُ</option>
+</select>
+
+<div id="tasbihArabic" class="tasbih-arabic"></div>
+
+<div class="counter">
+<div id="tasbihNumber" class="counter-number">0</div>
+<div class="counter-label">TIRINTA</div>
+</div>
+
+<div style="color:var(--muted)">
+Hadafka: <strong id="tasbihTargetText">33</strong>
+</div>
+
+<button id="tasbihMainButton" class="tasbih-main">
+📿<br>TIRSO
+</button>
+
+<div class="controls">
+<button class="small-btn" onclick="tasbihMinus()">−</button>
+<button class="small-btn" onclick="tasbihReset()">↻ Dib u bilow</button>
+<button class="small-btn" onclick="tasbihPlus()">+</button>
+</div>
+
+<div class="target-row">
+<input
+id="tasbihTargetInput"
+class="input"
+type="number"
+min="1"
+placeholder="Hadaf cusub"
+>
+
+<button class="small-btn" onclick="tasbihSetTarget()">OK</button>
+</div>
+
+<div class="section" style="margin-top:18px">
+<div class="progress-text">
+Horumarka:
+<span id="tasbihPercent">0%</span>
+</div>
+
+<div class="progress">
+<div id="tasbihProgressFill" class="progress-fill"></div>
+</div>
+
+<div id="tasbihComplete"
+style="display:none;text-align:center;color:var(--primary);font-weight:bold;margin-top:12px"
+>
+✓ Hadafkii waa la dhammaystiray
+</div>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= HADITH ================= -->
+
+<section id="hadithPage" class="page">
+
+<div class="top-header">
+<h1>📚 Xadiis</h1>
+<p>Xadiisyo iyo xusuusinno Islaami ah</p>
+</div>
+
+<input
+id="hadithSearch"
+class="input search"
+placeholder="Raadi xadiis..."
+oninput="renderHadiths()"
+>
+
+<div class="category-row" id="hadithCategories"></div>
+
+<div id="hadithList"></div>
+
+</section>
+
+
+<!-- ================= AI ================= -->
+
+<section id="aiPage" class="page">
+
+<div class="top-header">
+<h1>🤖 AI Su'aalaha Diinta</h1>
+<p>Kaaliyahaaga su'aalaha Islaamka</p>
+</div>
+
+<div class="ai-welcome">
+
+<h2>Assalaamu Calaykum 🤲🏽</h2>
+
+<p style="margin-top:10px">
+I weydii su'aal la xiriirta diinta Islaamka,
+Qur'aanka, Sunnada, salaadda, soonka,
+ducada, akhlaaqda iyo arrimaha kale ee diinta.
+</p>
+
+<div class="warning">
+⚠️ Jawaabaha AI-ga waa caawimo guud.
+Arrimaha fatwada iyo xaaladaha culus waxaa habboon
+in loo noqdo culimo lagu kalsoon yahay.
+</div>
+
+</div>
+
+<div class="quick">
+
+<button onclick="aiQuickQuestion('Sidee loo tukadaa salaadda?')">
+🕌 Salaad
+</button>
+
+<button onclick="aiQuickQuestion('Maxay tahay tawbadu?')">
+🤲 Tawbad
+</button>
+
+<button onclick="aiQuickQuestion('Waa maxay zakadu?')">
+💰 Zakaa
+</button>
+
+<button onclick="aiQuickQuestion('Sidee loo sameeyaa ducada?')">
+📿 Duco
+</button>
+
+</div>
+
+<div id="aiChat" class="chat">
+
+<div class="message ai">
+<strong>🤖 AI Diin:</strong><br>
+Maxaan kaa caawin karaa? I weydii su'aashaada
+ku saabsan diinta Islaamka.
+</div>
+
+</div>
+
+<div id="aiTyping" class="typing">
+🤖 AI-ga ayaa qoraya...
+</div>
+
+<div class="ai-input">
+
+<textarea
+id="aiQuestion"
+placeholder="Qor su'aashaada diinta..."
+onkeydown="aiHandleKey(event)"
+></textarea>
+
+<button class="send" onclick="sendAIQuestion()">➤</button>
+
+</div>
+
+<button
+class="small-btn"
+style="width:100%;margin-top:8px"
+onclick="clearAIChat()"
+>
+🗑️ Nadiifi wada sheekaysiga
+</button>
+
+</section>
+
+
+<!-- ================= SETTINGS ================= -->
+
+<section id="settingsPage" class="page">
+
+<div class="top-header">
+<h1>⚙️ Settings</h1>
+<p>Dejinta Deen of Islam</p>
+</div>
+
+<div class="section-title">Muuqaalka App-ka</div>
+
+<div class="section" style="padding:0">
+
+<div class="setting">
+
+<div class="setting-info">
+<div class="setting-icon">🌙</div>
+<div>
+<div class="setting-title">Dark Mode</div>
+<div class="setting-subtitle">
+Beddel muuqaalka app-ka
+</div>
+</div>
+</div>
+
+<label class="switch">
+<input type="checkbox" id="darkMode">
+<span class="slider"></span>
+</label>
+
+</div>
+
+</div>
+
+<div class="section-title">Luuqadda</div>
+
+<div class="section" style="padding:0">
+
+<div class="setting">
+
+<div class="setting-info">
+<div class="setting-icon">🌍</div>
+<div>
+<div class="setting-title">Language</div>
+<div class="setting-subtitle">
+Dooro luuqadda app-ka
+</div>
+</div>
+</div>
+
+<select id="language">
+<option value="so">Somali</option>
+<option value="en">English</option>
+<option value="ar">العربية</option>
+</select>
+
+</div>
+
+</div>
+
+<div class="section-title">Ku saabsan App-ka</div>
+
+<div class="section">
+
+<div class="about">
+
+<div class="logo">🕌</div>
+
+<h2>Deen of Islam</h2>
+
+<p>
+App Islaami ah oo kaa caawinaya Qur'aanka,
+Adhkaarta, Xadiiska iyo barashada Diinta Islaamka.
+</p>
+
+<div style="color:var(--muted);margin-top:14px;font-size:12px">
+Version 1.0.0
+</div>
+
+</div>
+
+</div>
+
+<div style="text-align:center;color:var(--muted);font-size:12px;padding:20px">
+© 2026 Deen of Islam ❤️
+</div>
+
+</section>
+
+</div>
+
+
+<!-- ================= BOTTOM NAV ================= -->
+
+<nav class="bottom-nav">
+
+<div class="nav-inner">
+
+<button class="nav-btn active" data-page="home" onclick="openPage('home')">
+<span>🏠</span>
+Home
+</button>
+
+<button class="nav-btn" data-page="quran" onclick="openPage('quran')">
+<span>📖</span>
+Qur'aan
+</button>
+
+<button class="nav-btn" data-page="adhkar" onclick="openPage('adhkar')">
+<span>🤲</span>
+Adhkar
+</button>
+
+<button class="nav-btn" data-page="hadith" onclick="openPage('hadith')">
+<span>📚</span>
+Xadiis
+</button>
+
+<button class="nav-btn" data-page="settings" onclick="openPage('settings')">
+<span>⚙️</span>
+Settings
+</button>
+
+</div>
+
+</nav>
+
+
+<!-- ================= HADITH MODAL ================= -->
+
+<div id="hadithModal" class="modal" onclick="closeHadithModal(event)">
+
+<div class="modal-box" onclick="event.stopPropagation()">
+
+<div id="hadithModalContent"></div>
+
+<button class="modal-close" onclick="closeHadithModal()">
+Xir
+</button>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+GLOBAL NAVIGATION
+========================================================= */
+
+function openPage(page){
+
+document.querySelectorAll(".page").forEach(function(item){
+item.classList.remove("active");
+});
+
+const target=document.getElementById(page+"Page");
+
+if(target){
+target.classList.add("active");
+}
+
+document.querySelectorAll(".nav-btn").forEach(function(btn){
+btn.classList.remove("active");
+
+if(btn.dataset.page===page){
+btn.classList.add("active");
+}
+});
+
+window.scrollTo(0,0);
+
+}
+
+
+/* =========================================================
+ONLINE / OFFLINE
+========================================================= */
+
+function updateOnlineAds(){
+
+const online=navigator.onLine;
+
+document.querySelectorAll(".online-ad").forEach(function(ad){
+ad.style.display=online ? "block" : "none";
+});
+
+}
+
+window.addEventListener("online",updateOnlineAds);
+window.addEventListener("offline",updateOnlineAds);
+
+
+/* =========================================================
+QURAN - 114 SURA
+========================================================= */
+
+const surahs=[
+
+[1,"Al-Faatixah","الفاتحة",7,"Makki"],
+[2,"Al-Baqarah","البقرة",286,"Madani"],
+[3,"Aal-Cimraan","آل عمران",200,"Madani"],
+[4,"An-Nisaa","النساء",176,"Madani"],
+[5,"Al-Maa'idah","المائدة",120,"Madani"],
+[6,"Al-Ancaam","الأنعام",165,"Makki"],
+[7,"Al-Acraaf","الأعراف",206,"Makki"],
+[8,"Al-Anfaal","الأنفال",75,"Madani"],
+[9,"At-Tawbah","التوبة",129,"Madani"],
+[10,"Yuunus","يونس",109,"Makki"],
+[11,"Huud","هود",123,"Makki"],
+[12,"Yuusuf","يوسف",111,"Makki"],
+[13,"Ar-Racd","الرعد",43,"Madani"],
+[14,"Ibraahiim","إبراهيم",52,"Makki"],
+[15,"Al-Hijr","الحجر",99,"Makki"],
+[16,"An-Nahl","النحل",128,"Makki"],
+[17,"Al-Israa","الإسراء",111,"Makki"],
+[18,"Al-Kahf","الكهف",110,"Makki"],
+[19,"Maryam","مريم",98,"Makki"],
+[20,"Taa-Haa","طه",135,"Makki"],
+[21,"Al-Anbiyaa","الأنبياء",112,"Makki"],
+[22,"Al-Hajj","الحج",78,"Madani"],
+[23,"Al-Mu'minuun","المؤمنون",118,"Makki"],
+[24,"An-Nuur","النور",64,"Madani"],
+[25,"Al-Furqaan","الفرقان",77,"Makki"],
+[26,"Ash-Shucaraa","الشعراء",227,"Makki"],
+[27,"An-Naml","النمل",93,"Makki"],
+[28,"Al-Qasas","القصص",88,"Makki"],
+[29,"Al-Ankabuut","العنكبوت",69,"Makki"],
+[30,"Ar-Ruum","الروم",60,"Makki"],
+[31,"Luqmaan","لقمان",34,"Makki"],
+[32,"As-Sajdah","السجدة",30,"Makki"],
+[33,"Al-Ahzaab","الأحزاب",73,"Madani"],
+[34,"Saba","سبأ",54,"Makki"],
+[35,"Faatir","فاطر",45,"Makki"],
+[36,"Yaa-Siin","يس",83,"Makki"],
+[37,"As-Saaffaat","الصافات",182,"Makki"],
+[38,"Saad","ص",88,"Makki"],
+[39,"Az-Zumar","الزمر",75,"Makki"],
+[40,"Ghaafir","غافر",85,"Makki"],
+[41,"Fussilat","فصلت",54,"Makki"],
+[42,"Ash-Shuuraa","الشورى",53,"Makki"],
+[43,"Az-Zukhruf","الزخرف",89,"Makki"],
+[44,"Ad-Dukhaan","الدخان",59,"Makki"],
+[45,"Al-Jaathiyah","الجاثية",37,"Makki"],
+[46,"Al-Ahqaaf","الأحقاف",35,"Makki"],
+[47,"Muhammad","محمد",38,"Madani"],
+[48,"Al-Fath","الفتح",29,"Madani"],
+[49,"Al-Hujuraat","الحجرات",18,"Madani"],
+[50,"Qaaf","ق",45,"Makki"],
+[51,"Adh-Dhaariyaat","الذاريات",60,"Makki"],
+[52,"At-Tuur","الطور",49,"Makki"],
+[53,"An-Najm","النجم",62,"Makki"],
+[54,"Al-Qamar","القمر",55,"Makki"],
+[55,"Ar-Rahmaan","الرحمن",78,"Madani"],
+[56,"Al-Waaqicah","الواقعة",96,"Makki"],
+[57,"Al-Hadiid","الحديد",29,"Madani"],
+[58,"Al-Mujaadilah","المجادلة",22,"Madani"],
+[59,"Al-Hashr","الحشر",24,"Madani"],
+[60,"Al-Mumtahanah","الممتحنة",13,"Madani"],
+[61,"As-Saff","الصف",14,"Madani"],
+[62,"Al-Jumucah","الجمعة",11,"Madani"],
+[63,"Al-Munaafiquun","المنافقون",11,"Madani"],
+[64,"At-Taghaabun","التغابن",18,"Madani"],
+[65,"At-Talaaq","الطلاق",12,"Madani"],
+[66,"At-Tahriim","التحريم",12,"Madani"],
+[67,"Al-Mulk","الملك",30,"Makki"],
+[68,"Al-Qalam","القلم",52,"Makki"],
+[69,"Al-Haaqqah","الحاقة",52,"Makki"],
+[70,"Al-Macaarij","المعارج",44,"Makki"],
+[71,"Nuux","نوح",28,"Makki"],
+[72,"Al-Jinn","الجن",28,"Makki"],
+[73,"Al-Muzzammil","المزمل",20,"Makki"],
+[74,"Al-Muddaththir","المدثر",56,"Makki"],
+[75,"Al-Qiyaamah","القيامة",40,"Makki"],
+[76,"Al-Insaan","الإنسان",31,"Madani"],
+[77,"Al-Mursalaat","المرسلات",50,"Makki"],
+[78,"An-Naba","النبأ",40,"Makki"],
+[79,"An-Naazicaat","النازعات",46,"Makki"],
+[80,"Abasa","عبس",42,"Makki"],
+[81,"At-Takwiir","التكوير",29,"Makki"],
+[82,"Al-Infitaar","الانفطار",19,"Makki"],
+[83,"Al-Mutaffifiin","المطففين",36,"Makki"],
+[84,"Al-Inshiqaaq","الانشقاق",25,"Makki"],
+[85,"Al-Buruuj","البروج",22,"Makki"],
+[86,"At-Taariq","الطارق",17,"Makki"],
+[87,"Al-Aclaa","الأعلى",19,"Makki"],
+[88,"Al-Ghaashiyah","الغاشية",26,"Makki"],
+[89,"Al-Fajr","الفجر",30,"Makki"],
+[90,"Al-Balad","البلد",20,"Makki"],
+[91,"Ash-Shams","الشمس",15,"Makki"],
+[92,"Al-Layl","الليل",21,"Makki"],
+[93,"Ad-Duhaa","الضحى",11,"Makki"],
+[94,"Ash-Sharh","الشرح",8,"Makki"],
+[95,"At-Tiin","التين",8,"Makki"],
+[96,"Al-Alaq","العلق",19,"Makki"],
+[97,"Al-Qadr","القدر",5,"Makki"],
+[98,"Al-Bayyinah","البينة",8,"Madani"],
+[99,"Az-Zalzalah","الزلزلة",8,"Madani"],
+[100,"Al-Caadiyaat","العاديات",11,"Makki"],
+[101,"Al-Qaari'ah","القارعة",11,"Makki"],
+[102,"At-Takaathur","التكاثر",8,"Makki"],
+[103,"Al-Asr","العصر",3,"Makki"],
+[104,"Al-Humazah","الهمزة",9,"Makki"],
+[105,"Al-Fiil","الفيل",5,"Makki"],
+[106,"Quraysh","قريش",4,"Makki"],
+[107,"Al-Maacuun","الماعون",7,"Makki"],
+[108,"Al-Kawthar","الكوثر",3,"Makki"],
+[109,"Al-Kaafiruun","الكافرون",6,"Makki"],
+[110,"An-Nasr","النصر",3,"Madani"],
+[111,"Al-Masad","المسد",5,"Makki"],
+[112,"Al-Ikhlaas","الإخلاص",4,"Makki"],
+[113,"Al-Falaq","الفلق",5,"Makki"],
+[114,"An-Naas","الناس",6,"Makki"]
+
+].map(function(x){
+return {
+number:x[0],
+name:x[1],
+arabic:x[2],
+ayahs:x[3],
+type:x[4]
+};
+});
+
+
+let quranData=null;
+let currentSurah=null;
+let quranPages=[];
+let currentQuranPage=0;
+
+const quranDBName="DeenOfIslamQuranDB";
+const quranStore="quran";
+
+
+function openQuranDB(){
+
+return new Promise(function(resolve,reject){
+
+const request=indexedDB.open(quranDBName,1);
+
+request.onupgradeneeded=function(event){
+
+const db=event.target.result;
+
+if(!db.objectStoreNames.contains(quranStore)){
+db.createObjectStore(quranStore);
+}
+
+};
+
+request.onsuccess=function(){
+resolve(request.result);
+};
+
+request.onerror=function(){
+reject(request.error);
+};
+
+});
+
+}
+
+
+async function saveQuranOffline(data){
+
+const db=await openQuranDB();
+
+return new Promise(function(resolve,reject){
+
+const tx=db.transaction(quranStore,"readwrite");
+
+tx.objectStore(quranStore).put(data,"fullQuran");
+
+tx.oncomplete=resolve;
+tx.onerror=function(){
+reject(tx.error);
+};
+
+});
+
+}
+
+
+async function getQuranOffline(){
+
+try{
+
+const db=await openQuranDB();
+
+return new Promise(function(resolve,reject){
+
+const tx=db.transaction(quranStore,"readonly");
+
+const request=tx.objectStore(quranStore).get("fullQuran");
+
+request.onsuccess=function(){
+resolve(request.result || null);
+};
+
+request.onerror=function(){
+resolve(null);
+};
+
+});
+
+}catch(e){
+
+return null;
+
+}
+
+}
+
+
+async function downloadFullQuran(){
+
+const status=document.getElementById("quranStatus");
+
+if(!navigator.onLine){
+
+status.textContent=
+"❌ Internet ma jiro. Soo dejintu waxay u baahan tahay internet.";
+
+return;
+
+}
+
+status.textContent=
+"⏳ Qur'aanka ayaa soo degaya... fadlan sug.";
+
+try{
+
+const response=await fetch(
+"https://api.alquran.cloud/v1/quran/quran-uthmani"
+);
+
+if(!response.ok){
+throw new Error("Download failed");
+}
+
+const json=await response.json();
+
+await saveQuranOffline(json.data);
+
+quranData=json.data;
+
+status.textContent=
+"✅ Qur'aanka oo dhan waa la kaydiyey. Hadda offline ayaad akhrisan kartaa.";
+
+}catch(error){
+
+status.textContent=
+"❌ Soo dejintu way fashilantay. Hubi internet-ka oo mar kale isku day.";
+
+}
+
+}
+
+
+async function loadQuran(){
+
+const offline=await getQuranOffline();
+
+if(offline){
+
+quranData=offline;
+
+document.getElementById("quranStatus").textContent=
+"✅ Qur'aanka offline ayaa diyaar ah.";
+
+}else{
+
+document.getElementById("quranStatus").textContent=
+"ℹ️ Qur'aanka offline wali lama soo dejin.";
+
+}
+
+renderSurahList();
+
+}
+
+
+function renderSurahList(list){
+
+const container=document.getElementById("surahList");
+
+const items=list || surahs;
+
+container.innerHTML="";
+
+items.forEach(function(surah){
+
+const div=document.createElement("div");
+
+div.className="surah-item";
+
+div.innerHTML=`
+<div class="surah-number">${surah.number}</div>
+
+<div class="surah-info">
+<strong>${surah.name}</strong>
+<small>${surah.ayahs} Aayadood · ${surah.type}</small>
+</div>
+
+<div class="surah-arabic">${surah.arabic}</div>
+`;
+
+div.onclick=function(){
+openSurah(surah.number);
+};
+
+container.appendChild(div);
+
+});
+
+}
+
+
+function filterSurahs(){
+
+const value=
+document.getElementById("surahSearch")
+.value
+.toLowerCase()
+.trim();
+
+const filtered=surahs.filter(function(s){
+return (
+s.name.toLowerCase().includes(value) ||
+s.arabic.includes(value) ||
+String(s.number)===value
+);
+});
+
+renderSurahList(filtered);
+
+}
+
+
+async function openSurah(number){
+
+if(!quranData){
+
+if(!navigator.onLine){
+
+alert(
+"Qur'aanka offline lama soo dejin. " +
+"Internet ku xiro oo marka hore soo dejiso Qur'aanka."
+);
+
+return;
+
+}
+
+try{
+
+const response=await fetch(
+"https://api.alquran.cloud/v1/surah/"+number
+);
+
+const json=await response.json();
+
+quranData={
+surahs:[json.data]
+};
+
+}catch(e){
+
+alert("Qur'aanka lama soo qaadi karin.");
+
+return;
+
+}
+
+}
+
+let surah=quranData.surahs.find(function(s){
+return Number(s.number)===Number(number);
+});
+
+if(!surah){
+
+/* Xogta offline qaarkeed waxay noqon kartaa array toos ah */
+if(Array.isArray(quranData)){
+surah=quranData.find(function(s){
+return Number(s.number)===Number(number);
+});
+}
+
+}
+
+if(!surah){
+
+alert("Suuraddan xogteeda lama helin.");
+return;
+
+}
+
+currentSurah=surah;
+
+buildQuranPages(surah);
+
+currentQuranPage=0;
+
+document.getElementById("quranMain").style.display="none";
+document.getElementById("reader").classList.add("active");
+
+renderQuranPage();
+
+}
+
+
+function buildQuranPages(surah){
+
+const groups={};
+
+if(!surah.ayahs){
+quranPages=[];
+return;
+}
+
+surah.ayahs.forEach(function(ayah){
+
+const page=ayah.page || Math.ceil(ayah.numberInSurah/10);
+
+if(!groups[page]){
+groups[page]=[];
+}
+
+groups[page].push(ayah);
+
+});
+
+quranPages=Object.keys(groups)
+.sort(function(a,b){return Number(a)-Number(b);})
+.map(function(page){
+return {
+page:Number(page),
+ayahs:groups[page]
+};
+});
+
+}
+
+
+function renderQuranPage(){
+
+if(!currentSurah || !quranPages.length){
+return;
+}
+
+const page=quranPages[currentQuranPage];
+
+let html=`
+<div class="page-title">
+${currentSurah.name}
+<br>
+<span style="font-size:18px">${currentSurah.arabic}</span>
+</div>
+`;
+
+if(currentQuranPage===0){
+
+html+=`
+<div class="bismillah">
+بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ
+</div>
+`;
+
+}
+
+page.ayahs.forEach(function(ayah){
+
+html+=`
+<div class="ayah-line">
+${escapeHTML(ayah.text)}
+<span class="ayah-num">${ayah.numberInSurah}</span>
+</div>
+`;
+
+});
+
+document.getElementById("readerPage").innerHTML=html;
+
+document.getElementById("readerPageNumber").textContent=
+"Bogga "+(currentQuranPage+1)+" / "+quranPages.length;
+
+document.getElementById("prevPageBtn").disabled=
+currentQuranPage===0;
+
+document.getElementById("nextPageBtn").disabled=
+currentQuranPage===quranPages.length-1;
+
+}
+
+
+function changeQuranPage(direction){
+
+const next=currentQuranPage+direction;
+
+if(next<0 || next>=quranPages.length){
+return;
+}
+
+currentQuranPage=next;
+
+renderQuranPage();
+
+}
+
+
+function closeReader(){
+
+document.getElementById("reader").classList.remove("active");
+document.getElementById("quranMain").style.display="block";
+
+}
+
+
+function showQuranList(){
+
+document.getElementById("surahList").style.display="flex";
+
+}
+
+
+function escapeHTML(text){
+
+const div=document.createElement("div");
+div.textContent=text || "";
+return div.innerHTML;
+
+}
+
+
+/* =========================================================
+ADHKAR
+========================================================= */
+
+const adhkarData={
+
+subax:[
+{
+ar:"أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ",
+meaning:"Waxaan galnay subax, boqortooyaduna Alle ayay leedahay.",
+count:1
+},
+{
+ar:"سُبْحَانَ اللَّهِ وَبِحَمْدِهِ",
+meaning:"Alle waa ka nasahan yahay ceeb, mahadna isaga ayay u sugnaatay.",
+count:100
+},
+{
+ar:"أَسْتَغْفِرُ اللَّهَ",
+meaning:"Waxaan Alle ka dalbanayaa dambi-dhaaf.",
+count:100
+}
+],
+
+galab:[
+{
+ar:"أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلَّهِ",
+meaning:"Waxaan galnay galab, boqortooyaduna Alle ayay leedahay.",
+count:1
+},
+{
+ar:"سُبْحَانَ اللَّهِ وَبِحَمْدِهِ",
+meaning:"Alle waa ka nasahan yahay ceeb, mahadna isaga ayay u sugnaatay.",
+count:100
+},
+{
+ar:"أَسْتَغْفِرُ اللَّهَ",
+meaning:"Waxaan Alle ka dalbanayaa dambi-dhaaf.",
+count:100
+}
+],
+
+hurdo:[
+{
+ar:"بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا",
+meaning:"Magacaaga Ilaahayow ayaan ku dhintaa kuna noolaadaa.",
+count:1
+},
+{
+ar:"سُبْحَانَ اللَّهِ",
+meaning:"Alle waa ka nasahan yahay ceeb kasta.",
+count:33
+},
+{
+ar:"الْحَمْدُ لِلَّهِ",
+meaning:"Mahad oo dhan Alle ayay u sugnaatay.",
+count:33
+}
+],
+
+salaad:[
+{
+ar:"أَسْتَغْفِرُ اللَّهَ",
+meaning:"Waxaan Alle ka dalbanayaa dambi-dhaaf.",
+count:3
+},
+{
+ar:"اللَّهُمَّ أَنْتَ السَّلَامُ وَمِنْكَ السَّلَامُ",
+meaning:"Ilaahayow adigu waxaad tahay Nabad, nabadduna adiga ayay kaa timid.",
+count:1
+}
+],
+
+maalinle:[
+{
+ar:"لَا إِلَٰهَ إِلَّا اللَّهُ",
+meaning:"Ma jiro ilaah xaq lagu caabudo oo aan Alle ahayn.",
+count:100
+},
+{
+ar:"سُبْحَانَ اللَّهِ وَبِحَمْدِهِ",
+meaning:"Alle waa ka nasahan yahay ceeb, mahadna isaga ayay u sugnaatay.",
+count:100
+}
+],
+
+duco:[
+{
+ar:"رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً",
+meaning:"Rabbiyow adduunka wanaag nagu sii, aakhiradana wanaag nagu sii.",
+count:1
+},
+{
+ar:"رَبِّ اغْفِرْ لِي",
+meaning:"Rabbiyow ii dambi dhaaf.",
+count:3
+}
+]
+
+};
+
+const adhkarNames={
+subax:"Subax",
+galab:"Galab",
+hurdo:"Hurdo",
+salaad:"Salaad",
+maalinle:"Maalinle",
+duco:"Duco"
+};
+
+let currentAdhkar="subax";
+
+let adhkarProgress=
+JSON.parse(localStorage.getItem("adhkar_progress") || "{}");
+
+if(!adhkarProgress || typeof adhkarProgress!=="object"){
+adhkarProgress={};
+}
+
+
+function saveAdhkar(){
+localStorage.setItem(
+"adhkar_progress",
+JSON.stringify(adhkarProgress)
+);
+}
+
+
+function renderAdhkarCategories(){
+
+const box=document.getElementById("adhkarCategories");
+
+box.innerHTML="";
+
+Object.keys(adhkarData).forEach(function(key){
+
+const button=document.createElement("button");
+
+button.className=
+"category-btn "+(key===currentAdhkar?"active":"");
+
+button.textContent=adhkarNames[key];
+
+button.onclick=function(){
+currentAdhkar=key;
+renderAdhkarCategories();
+renderAdhkar();
+};
+
+box.appendChild(button);
+
+});
+
+}
+
+
+function renderAdhkar(){
+
+const list=document.getElementById("adhkarList");
+
+list.innerHTML="";
+
+const data=adhkarData[currentAdhkar] || [];
+
+if(!adhkarProgress[currentAdhkar]){
+adhkarProgress[currentAdhkar]=[];
+}
+
+let completed=0;
+
+data.forEach(function(item,index){
+
+const done=
+Number(adhkarProgress[currentAdhkar][index] || 0)
+>=item.count;
+
+if(done) completed++;
+
+const card=document.createElement("div");
+
+card.className="dhikr-card";
+
+card.innerHTML=`
+<div class="dhikr-arabic">${item.ar}</div>
+
+<div class="dhikr-meaning">
+${item.meaning}
+</div>
+
+<div style="color:var(--muted);font-size:12px;margin-bottom:8px">
+Tirada: ${adhkarProgress[currentAdhkar][index] || 0} / ${item.count}
+</div>
+
+<button
+class="count-btn ${done?"done":""}"
+${done?"disabled":""}
+>
+${done?"✓ Waa la dhammaystiray":"Taabo • "+item.count}
+</button>
+`;
+
+card.querySelector("button").onclick=function(){
+
+const old=
+Number(adhkarProgress[currentAdhkar][index] || 0);
+
+if(old<item.count){
+
+adhkarProgress[currentAdhkar][index]=old+1;
+
+saveAdhkar();
+renderAdhkar();
+
+}
+
+};
+
+list.appendChild(card);
+
+});
+
+const percent=
+data.length?
+Math.round((completed/data.length)*100):0;
+
+document.getElementById("adhkarProgressText").textContent=
+"Horumarka: "+percent+"%";
+
+document.getElementById("adhkarProgressFill").style.width=
+percent+"%";
+
+}
+
+
+function resetAdhkar(){
+
+adhkarProgress[currentAdhkar]=[];
+
+saveAdhkar();
+renderAdhkar();
+
+}
+
+
+/* =========================================================
+TASBIIX
+========================================================= */
+
+const tasbihTargetsDefault={
+subhanallah:33,
+alhamdulillah:33,
+allahuakbar:34,
+istighfar:100,
+hawqala:100,
+salawat:10,
+"la ilaha":100
+};
+
+const tasbihNames={
+subhanallah:"سُبْحَانَ اللَّهِ",
+alhamdulillah:"الْحَمْدُ لِلَّهِ",
+allahuakbar:"اللَّهُ أَكْبَرُ",
+istighfar:"أَسْتَغْفِرُ اللَّهَ",
+hawqala:"لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ",
+salawat:"اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ",
+"la ilaha":"لَا إِلَٰهَ إِلَّا اللَّهُ"
+};
+
+let tasbihCurrent=
+localStorage.getItem("tasbih_current") || "subhanallah";
+
+let tasbihCounts=
+JSON.parse(localStorage.getItem("tasbih_counts") || "{}");
+
+let tasbihTargets=
+JSON.parse(localStorage.getItem("tasbih_targets") || "{}");
+
+
+function saveTasbih(){
+
+localStorage.setItem(
+"tasbih_current",
+tasbihCurrent
+);
+
+localStorage.setItem(
+"tasbih_counts",
+JSON.stringify(tasbihCounts)
+);
+
+localStorage.setItem(
+"tasbih_targets",
+JSON.stringify(tasbihTargets)
+);
+
+}
+
+
+function getTasbihTarget(){
+
+if(!tasbihTargets[tasbihCurrent]){
+tasbihTargets[tasbihCurrent]=
+tasbihTargetsDefault[tasbihCurrent] || 33;
+}
+
+return tasbihTargets[tasbihCurrent];
+
+}
+
+
+function renderTasbih(){
+
+const count=
+tasbihCounts[tasbihCurrent] || 0;
+
+const target=getTasbihTarget();
+
+document.getElementById("tasbihSelect").value=
+tasbihCurrent;
+
+document.getElementById("tasbihArabic").textContent=
+tasbihNames[tasbihCurrent];
+
+document.getElementById("tasbihNumber").textContent=
+count;
+
+document.getElementById("tasbihTargetText").textContent=
+target;
+
+const percent=
+Math.min(100,Math.round((count/target)*100));
+
+document.getElementById("tasbihPercent").textContent=
+percent+"%";
+
+document.getElementById("tasbihProgressFill").style.width=
+percent+"%";
+
+document.getElementById("tasbihComplete").style.display=
+count>=target?"block":"none";
+
+}
+
+
+function tasbihTap(){
+
+if(!tasbihCounts[tasbihCurrent]){
+tasbihCounts[tasbihCurrent]=0;
+}
+
+tasbihCounts[tasbihCurrent]++;
+
+saveTasbih();
+renderTasbih();
+
+if(navigator.vibrate){
+navigator.vibrate(25);
+}
+
+}
+
+
+function tasbihMinus(){
+
+const count=
+tasbihCounts[tasbihCurrent] || 0;
+
+tasbihCounts[tasbihCurrent]=
+Math.max(0,count-1);
+
+saveTasbih();
+renderTasbih();
+
+}
+
+
+function tasbihPlus(){
+tasbihTap();
+}
+
+
+function tasbihReset(){
+
+tasbihCounts[tasbihCurrent]=0;
+
+saveTasbih();
+renderTasbih();
+
+}
+
+
+function tasbihSetTarget(){
+
+const input=
+document.getElementById("tasbihTargetInput");
+
+const value=parseInt(input.value,10);
+
+if(!value || value<1){
+return;
+}
+
+tasbihTargets[tasbihCurrent]=value;
+
+input.value="";
+
+saveTasbih();
+renderTasbih();
+
+}
+
+
+document
+.getElementById("tasbihSelect")
+.addEventListener("change",function(){
+
+tasbihCurrent=this.value;
+
+saveTasbih();
+renderTasbih();
+
+});
+
+
+document
+.getElementById("tasbihMainButton")
+.addEventListener("click",tasbihTap);
+
+
+/* =========================================================
+HADITH
+========================================================= */
+
+const hadithData=[
+
+{
+cat:"Iimaan",
+ar:"إِنَّمَا الأَعْمَالُ بِالنِّيَّاتِ",
+so:"Camalladu waxay ku xiran yihiin niyadaha.",
+source:"Saxiix Al-Bukhaari"
+},
+
+{
+cat:"Iimaan",
+ar:"بُنِيَ الإِسْلَامُ عَلَى خَمْسٍ",
+so:"Islaamka waxaa lagu dhisay shan tiir.",
+source:"Saxiix Al-Bukhaari iyo Muslim"
+},
+
+{
+cat:"Salaad",
+ar:"مِفْتَاحُ الصَّلَاةِ الطُّهُورُ",
+so:"Furaha salaaddu waa daahirnimada.",
+source:"Abuu Daawuud iyo At-Tirmidhi"
+},
+
+{
+cat:"Akhlaaq",
+ar:"إِنَّ مِنْ خِيَارِكُمْ أَحْسَنَكُمْ أَخْلَاقًا",
+so:"Kuwa idiinku khayr badan waa kuwa akhlaaqda ugu wanaagsan.",
+source:"Saxiix Al-Bukhaari"
+},
+
+{
+cat:"Akhlaaq",
+ar:"لَيْسَ الشَّدِيدُ بِالصُّرَعَةِ",
+so:"Qofka xoogga badan ma aha kan dadka legda, balse waa kan naftiisa xakameeya marka uu xanaaqo.",
+source:"Saxiix Al-Bukhaari iyo Muslim"
+},
+
+{
+cat:"Ducada",
+ar:"الدُّعَاءُ هُوَ الْعِبَادَةُ",
+so:"Ducadu waa cibaado.",
+source:"Abuu Daawuud iyo At-Tirmidhi"
+},
+
+{
+cat:"Waalidka",
+ar:"رِضَا الرَّبِّ فِي رِضَا الْوَالِدِ",
+so:"Raallinimada Rabbigu waxay ku jirtaa raallinimada waalidka.",
+source:"At-Tirmidhi"
+},
+
+{
+cat:"Soon",
+ar:"مَنْ صَامَ رَمَضَانَ إِيمَانًا وَاحْتِسَابًا غُفِرَ لَهُ",
+so:"Qofkii Ramadaan sooma isagoo iimaan iyo ajar-doon ah, dambigiisii hore waa loo dhaafaa.",
+source:"Saxiix Al-Bukhaari iyo Muslim"
+},
+
+{
+cat:"Soon",
+ar:"الصِّيَامُ جُنَّةٌ",
+so:"Soonku waa gaashaan.",
+source:"Saxiix Al-Bukhaari iyo Muslim"
+},
+
+{
+cat:"Akhlaaq",
+ar:"مَنْ لَا يَرْحَمْ لَا يُرْحَمْ",
+so:"Qofkii aan naxariisan, looma naxariisto.",
+source:"Saxiix Al-Bukhaari iyo Muslim"
+},
+
+{
+cat:"Nolol",
+ar:"كُنْ فِي الدُّنْيَا كَأَنَّكَ غَرِيبٌ",
+so:"Adduunkan u noqo sida qof shisheeye ah ama musaafir ah.",
+source:"Saxiix Al-Bukhaari"
+},
+
+{
+cat:"Iimaan",
+ar:"الْحَيَاءُ مِنَ الإِيمَانِ",
+so:"Xishoodku wuxuu ka mid yahay iimaanka.",
+source:"Saxiix Al-Bukhaari iyo Muslim"
+},
+
+{
+cat:"Akhlaaq",
+ar:"مَنْ غَشَّنَا فَلَيْسَ مِنَّا",
+so:"Qofkii na khiyaameeya naga mid ma aha.",
+source:"Saxiix Muslim"
+},
+
+{
+cat:"Waalidka",
+ar:"أُمُّكَ ثُمَّ أُمُّكَ ثُمَّ أُمُّكَ ثُمَّ أَبُوكَ",
+so:"Hooyadaa, dabadeed hooyadaa, dabadeed hooyadaa, dabadeed aabbahaa.",
+source:"Saxiix Al-Bukhaari iyo Muslim"
+},
+
+{
+cat:"Iimaan",
+ar:"الطُّهُورُ شَطْرُ الإِيمَانِ",
+so:"Daahirnimadu waa qayb weyn oo iimaanka ka mid ah.",
+source:"Saxiix Muslim"
+},
+
+{
+cat:"Nolol",
+ar:"اغْتَنِمْ خَمْسًا قَبْلَ خَمْسٍ",
+so:"Ka faa'iidayso shan waxyaalood ka hor shan kale.",
+source:"Al-Haakim"
+},
+
+{
+cat:"Ducada",
+ar:"مَنْ لَمْ يَسْأَلِ اللَّهَ يَغْضَبْ عَلَيْهِ",
+so:"Qofkii aan Alle waydiisan, Alle wuu ka caroodaa.",
+source:"At-Tirmidhi"
+},
+
+{
+cat:"Akhlaaq",
+ar:"الْكَلِمَةُ الطَّيِّبَةُ صَدَقَةٌ",
+so:"Hadalka wanaagsan waa sadaqo.",
+source:"Saxiix Al-Bukhaari iyo Muslim"
+},
+
+{
+cat:"Salaad",
+ar:"أَحَبُّ الأَعْمَالِ إِلَى اللَّهِ الصَّلَاةُ عَلَى وَقْتِهَا",
+so:"Camallada Alle ugu jecel waa salaadda waqtigeeda.",
+source:"Saxiix Al-Bukhaari iyo Muslim"
+},
+
+{
+cat:"Iimaan",
+ar:"المُسْلِمُ مَنْ سَلِمَ المُسْلِمُونَ مِنْ لِسَانِهِ وَيَدِهِ",
+so:"Muslimka dhabta ahi waa kan Muslimiintu ka nabad galaan carrabkiisa iyo gacantiisa.",
+source:"Saxiix Al-Bukhaari iyo Muslim"
+}
+
+];
+
+let hadithCategory="Dhammaan";
+
+const hadithFavorites=
+new Set(
+JSON.parse(
+localStorage.getItem("hadithFavorites") || "[]"
+)
+);
+
+
+function saveHadithFavorites(){
+
+localStorage.setItem(
+"hadithFavorites",
+JSON.stringify(Array.from(hadithFavorites))
+);
+
+}
+
+
+function renderHadithCategories(){
+
+const box=document.getElementById("hadithCategories");
+
+const cats=[
+"Dhammaan",
+"Iimaan",
+"Salaad",
+"Akhlaaq",
+"Ducada",
+"Soon",
+"Waalidka",
+"Nolol",
+"Favorites"
+];
+
+box.innerHTML="";
+
+cats.forEach(function(cat){
+
+const btn=document.createElement("button");
+
+btn.className=
+"category-btn "+(cat===hadithCategory?"active":"");
+
+btn.textContent=cat;
+
+btn.onclick=function(){
+
+hadithCategory=cat;
+
+renderHadithCategories();
+renderHadiths();
+
+};
+
+box.appendChild(btn);
+
+});
+
+}
+
+
+function renderHadiths(){
+
+const list=document.getElementById("hadithList");
+
+const search=
+document.getElementById("hadithSearch")
+.value
+.toLowerCase()
+.trim();
+
+let results=hadithData.map(function(item,index){
+return {...item,index};
+});
+
+if(hadithCategory!=="Dhammaan"){
+
+if(hadithCategory==="Favorites"){
+
+results=results.filter(function(item){
+return hadithFavorites.has(String(item.index));
+});
+
+}else{
+
+results=results.filter(function(item){
+return item.cat===hadithCategory;
+});
+
+}
+
+}
+
+if(search){
+
+results=results.filter(function(item){
+
+return (
+item.ar.toLowerCase().includes(search) ||
+item.so.toLowerCase().includes(search) ||
+item.source.toLowerCase().includes(search)
+);
+
+});
+
+}
+
+if(!results.length){
+
+list.innerHTML=`
+<div class="section" style="text-align:center;color:var(--muted)">
+Wax natiijo ah lama helin.
+</div>
+`;
+
+return;
+
+}
+
+list.innerHTML="";
+
+results.forEach(function(item){
+
+const card=document.createElement("div");
+
+card.className="hadith-card";
+
+card.innerHTML=`
+<div class="hadith-arabic">${item.ar}</div>
+
+<div class="hadith-somali">
+${item.so}
+</div>
+
+<div class="hadith-footer">
+
+<span>${item.source}</span>
+
+<button class="favorite">
+${hadithFavorites.has(String(item.index))?"★":"☆"}
+</button>
+
+</div>
+`;
+
+card.onclick=function(event){
+
+if(event.target.classList.contains("favorite")){
+return;
+}
+
+openHadithModal(item);
+
+};
+
+card.querySelector(".favorite").onclick=function(event){
+
+event.stopPropagation();
+
+const key=String(item.index);
+
+if(hadithFavorites.has(key)){
+hadithFavorites.delete(key);
+}else{
+hadithFavorites.add(key);
+}
+
+saveHadithFavorites();
+renderHadiths();
+
+};
+
+list.appendChild(card);
+
+});
+
+}
+
+
+function openHadithModal(item){
+
+document.getElementById("hadithModalContent").innerHTML=`
+
+<h2 style="margin-bottom:15px">
+📚 Xadiis
+</h2>
+
+<div class="hadith-arabic">
+${item.ar}
+</div>
+
+<p class="hadith-somali">
+${item.so}
+</p>
+
+<div class="reference">
+${item.source}
+</div>
+`;
+
+document.getElementById("hadithModal")
+.classList.add("show");
+
+}
+
+
+function closeHadithModal(event){
+
+if(event && event.target!==event.currentTarget){
+return;
+}
+
+document.getElementById("hadithModal")
+.classList.remove("show");
+
+}
+
+
+/* =========================================================
+AI DIIN
+========================================================= */
+
+const API_URL="";
+
+let aiHistory=
+JSON.parse(
+localStorage.getItem("deenAIHistory") || "[]"
+);
+
+
+const islamicKeywords=[
+
+"islam",
+"islaam",
+"diin",
+"quraan",
+"qur'aan",
+"quran",
+"sunnah",
+"sunno",
+"xadiis",
+"xadiiska",
+"nabiga",
+"rasuul",
+"allah",
+"alle",
+"salaad",
+"salaadda",
+"soon",
+"ramadaan",
+"zakaa",
+"zako",
+"xaj",
+"cumro",
+"duco",
+"dikri",
+"tasbiix",
+"wudu",
+"weyso",
+"tahara",
+"daahir",
+"janaba",
+"janno",
+"naar",
+"aakhiro",
+"iimaan",
+"caqiido",
+"tawbad",
+"dambi",
+"xalaal",
+"xaaraan",
+"waalid",
+"waalidka",
+"guur",
+"nikax",
+"sadaqo",
+"fitro",
+"tahajjud",
+"salaatul layl",
+"adhkaar",
+"adkaar",
+"cibaado"
+];
+
+
+const nonIslamicKeywords=[
+
+"pubg",
+"football",
+"youtube",
+"programming",
+"javascript",
+"html",
+"css",
+"computer",
+"phone",
+"samsung",
+"crypto",
+"bitcoin",
+"stock",
+"coding",
+"movie",
+"film",
+"music",
+"game",
+"ciyaar",
+"weather",
+"politics",
+"politic",
+"siyaasad",
+"doctor",
+"hospital",
+"medicine",
+"xisaab",
+"math"
+
+];
+
+
+function isIslamicQuestion(question){
+
+const q=question.toLowerCase();
+
+return islamicKeywords.some(function(word){
+return q.includes(word);
+});
+
+}
+
+
+function isClearlyNonIslamic(question){
+
+const q=question.toLowerCase();
+
+return nonIslamicKeywords.some(function(word){
+return q.includes(word);
+});
+
+}
+
+
+async function sendAIQuestion(){
+
+const input=document.getElementById("aiQuestion");
+
+const question=input.value.trim();
+
+if(!question){
+return;
+}
+
+addAIMessage(question,"user");
+
+input.value="";
+
+if(
+isClearlyNonIslamic(question) &&
+!isIslamicQuestion(question)
+){
+
+addAIMessage(
+"🤲 Waxaan ahay AI loogu talagalay su'aalaha diinta Islaamka oo keliya. Fadlan i weydii su'aal ku saabsan Qur'aanka, Sunnada, salaadda, soonka, ducada, akhlaaqda ama arrin kale oo Islaam ah.",
+"ai"
+);
+
+return;
+
+}
+
+showAITyping(true);
+
+if(!API_URL){
+
+setTimeout(function(){
+
+showAITyping(false);
+
+addAIMessage(
+getDemoAIAnswer(question),
+"ai"
+);
+
+},700);
+
+return;
+
+}
+
+try{
+
+const response=await fetch(API_URL,{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+question:question,
+history:aiHistory
+})
+
+});
+
+if(!response.ok){
+throw new Error("API Error");
+}
+
+const data=await response.json();
+
+showAITyping(false);
+
+addAIMessage(
+data.answer ||
+data.response ||
+"Jawaab lama helin.",
+"ai"
+);
+
+}catch(error){
+
+showAITyping(false);
+
+addAIMessage(
+"❌ Waxaa dhacay cilad xiriirka AI-ga. Fadlan hubi internet-ka oo mar kale isku day.",
+"ai"
+);
+
+}
+
+}
+
+
+function getDemoAIAnswer(question){
+
+const q=question.toLowerCase();
+
+if(
+q.includes("salaad") ||
+q.includes("salaadda")
+){
+
+return `
+<strong>🕌 Jawaab:</strong><br><br>
+Salaaddu waa tiir muhiim ah oo ka mid ah Islaamka.
+Muslimku wuxuu tukadaa shanta salaadood ee waajibka ah
+maalintii.
+
+<div class="reference">
+📖 Xusuusin: Faahfaahinta habka salaadda waxaa laga barto
+Qur'aanka iyo Sunnada Nabiga ﷺ.
+</div>
+`;
+
+}
+
+if(
+q.includes("tawbad") ||
+q.includes("dambi")
+){
+
+return `
+<strong>🤲 Jawaab:</strong><br><br>
+Tawbaddu waa in qofku dambiga ka noqdo, Alle ka dalbo
+cafis, ka qoomameeyo wixii uu sameeyay, kuna dadaalo
+inuusan dib ugu noqon.
+
+<div class="reference">
+📖 Qur'aan: Az-Zumar 39:53
+</div>
+`;
+
+}
+
+if(
+q.includes("soon") ||
+q.includes("ramadaan")
+){
+
+return `
+<strong>🌙 Jawaab:</strong><br><br>
+Soonka Ramadaanku waa waajib ku ah Muslimka awooda
+inuu soomo. Soonku wuxuu ka bilaabmaa waaberiga ilaa
+qorrax dhaca.
+
+<div class="reference">
+📖 Qur'aan: Al-Baqarah 2:183
+</div>
+`;
+
+}
+
+if(
+q.includes("duco") ||
+q.includes("dikri") ||
+q.includes("tasbiix")
+){
+
+return `
+<strong>🤲 Jawaab:</strong><br><br>
+Ducadu waa cibaado weyn. Muslimku wuxuu Alle weydiisan
+karaa kheyrka adduun iyo aakhiro.
+
+<div class="reference">
+📖 Qur'aan: Ghafir 40:60
+</div>
+`;
+
+}
+
+return `
+<strong>🤖 AI Diin:</strong><br><br>
+Su'aashan waxay u baahan tahay jawaab diini ah oo
+faahfaahsan. Marka AI-ga dhabta ah lagu xiro backend-ka,
+jawaabaha waxaa lagu soo gudbin karaa iyadoo tixraacyadu
+ku lifaaqan yihiin marka la heli karo.
+
+<div class="reference">
+⚠️ Arrimaha fatwada gaarka ah waxaa habboon in loo noqdo
+culimo lagu kalsoon yahay.
+</div>
+`;
+
+}
+
+
+function addAIMessage(text,type){
+
+const chat=document.getElementById("aiChat");
+
+const message=document.createElement("div");
+
+message.className="message "+type;
+
+if(type==="user"){
+message.textContent=text;
+}else{
+message.innerHTML=text;
+}
+
+chat.appendChild(message);
+
+chat.scrollTop=chat.scrollHeight;
+
+aiHistory.push({
+role:type,
+content:text
+});
+
+localStorage.setItem(
+"deenAIHistory",
+JSON.stringify(aiHistory)
+);
+
+}
+
+
+function aiQuickQuestion(question){
+
+document.getElementById("aiQuestion").value=question;
+
+sendAIQuestion();
+
+}
+
+
+function showAITyping(show){
+
+document.getElementById("aiTyping")
+.style.display=show?"block":"none";
+
+}
+
+
+function aiHandleKey(event){
+
+if(
+event.key==="Enter" &&
+!event.shiftKey
+){
+
+event.preventDefault();
+
+sendAIQuestion();
+
+}
+
+}
+
+
+function clearAIChat(){
+
+if(
+!confirm(
+"Ma hubtaa inaad tirtirayso wada sheekaysiga?"
+)
+){
+return;
+}
+
+aiHistory=[];
+
+localStorage.removeItem("deenAIHistory");
+
+document.getElementById("aiChat").innerHTML=`
+
+<div class="message ai">
+<strong>🤖 AI Diin:</strong><br>
+Wada sheekaysigu waa la nadiifiyey.
+I weydii su'aal ku saabsan diinta Islaamka.
+</div>
+
+`;
+
+}
+
+
+/* =========================================================
+SETTINGS
+========================================================= */
+
+const darkMode=document.getElementById("darkMode");
+const language=document.getElementById("language");
+
+const savedTheme=
+localStorage.getItem("deen_theme");
+
+if(savedTheme==="light"){
+
+document.body.classList.add("light");
+darkMode.checked=false;
+
+}else{
+
+darkMode.checked=true;
+
+}
+
+
+darkMode.addEventListener("change",function(){
+
+if(this.checked){
+
+document.body.classList.remove("light");
+
+localStorage.setItem(
+"deen_theme",
+"dark"
+);
+
+}else{
+
+document.body.classList.add("light");
+
+localStorage.setItem(
+"deen_theme",
+"light"
+);
+
+}
+
+});
+
+
+const savedLanguage=
+localStorage.getItem("deen_language");
+
+if(savedLanguage){
+language.value=savedLanguage;
+}
+
+
+language.addEventListener("change",function(){
+
+localStorage.setItem(
+"deen_language",
+this.value
+);
+
+if(this.value==="so"){
+alert("Luuqadda Soomaaliga ayaa la doortay.");
+}
+
+if(this.value==="en"){
+alert("English language selected.");
+}
+
+if(this.value==="ar"){
+alert("تم اختيار اللغة العربية.");
+}
+
+});
+
+
+/* =========================================================
+START APP
+========================================================= */
+
+renderSurahList();
+
+renderAdhkarCategories();
+renderAdhkar();
+
+document.getElementById("tasbihSelect").value=
+tasbihCurrent;
+
+renderTasbih();
+
+renderHadithCategories();
+renderHadiths();
+
+updateOnlineAds();
+
+loadQuran();
+
+</script>
+
+</body>
+  </html>
