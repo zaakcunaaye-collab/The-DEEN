@@ -1,10 +1,39 @@
 <!DOCTYPE html>
 <html lang="so">
-<head><link rel="manifest" href="manifest.json">
+<head><link rel="manifest" id="appManifest">
+
+<script>
+const manifest = {
+  name: "Deen of Islam",
+  short_name: "Deen Islam",
+  description: "Qur'aan, Adhkaar, Tasbiix, Xadiis iyo Deen AI",
+  start_url: ".",
+  scope: ".",
+  display: "standalone",
+  orientation: "portrait",
+  background_color: "#101817",
+  theme_color: "#101817",
+  lang: "so",
+  dir: "ltr",
+  categories: ["books", "education", "lifestyle"],
+  icons: []
+};
+
+const manifestBlob = new Blob(
+  [JSON.stringify(manifest)],
+  {type: "application/manifest+json"}
+);
+
+const manifestURL = URL.createObjectURL(manifestBlob);
+
+document
+  .getElementById("appManifest")
+  .setAttribute("href", manifestURL);
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#101817">
-<title>Deen of Islam</title>
+<title>THE NOOR</title>
 
 <style>
 *{
